@@ -60,6 +60,13 @@ virustotal
 zoomeye
 ```
 
+```
+cat sources.txt | while read source; do theHarvester -d "${TARGET}" -b $source -f "${source}_${TARGET}";done
+cat *.json | jq -r '.hosts[]' 2>/dev/null | cut -d':' -f 1 | sort -u > "${TARGET}_theHarvester.txt"
+cat facebook.com_*.txt | sort -u > facebook.com_subdomains_passive.txt
+cat facebook.com_subdomains_passive.txt | wc -l
+```
+
 ---
 ## Passive Infrastructure Identification
 
