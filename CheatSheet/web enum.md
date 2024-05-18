@@ -40,6 +40,7 @@
 | `curl -s https://sonar.omnisint.io/reverse/{ip}/{mask} \| jq -r '.[]' \| sort -u` | Reverse DNS lookup of a CIDR range. |
 | `curl -s "https://crt.sh/?q=${TARGET}&output=json" \| jq -r '.[] \| "\(.name_value)\n\(.common_name)"' \| sort -u` | Certificate Transparency. |
 | `cat sources.txt \| while read source; do theHarvester -d "${TARGET}" -b $source -f "${source}-${TARGET}";done` | Searching for subdomains and other information on the sources provided in the source.txt list. |
+| `openssl s_client -ign_eof 2>/dev/null <<<$'HEAD / HTTP/1.0\r\n\r' -connect "${TARGET}:${PORT}" \| openssl x509 -noout -text -in - \| grep 'DNS' \| sed -e 's\|DNS:\|\n\|g' -e 's\|^\*.*\|\|g' \| tr -d ',' \| sort -u` | Certificate Transparency using OpenSSL |
 
 #### Sources.txt
 ```txt
