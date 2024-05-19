@@ -90,6 +90,9 @@ cat facebook.com_subdomains_passive.txt | wc -l
 | `Aquatone` | [https://github.com/michenriksen/aquatone](https://github.com/michenriksen/aquatone) |
 | `cat subdomain.list \| aquatone -out ./aquatone -screenshot-timeout 1000` | Makes screenshots of all subdomains in the subdomain.list. |
 
+> `wafw00f` We can use options like -a to check all possible WAFs in place instead of stopping scanning at the first match, read targets from an input file via the -i flag, or proxy the requests using the -p option.
+
+
 
 ---
 ## Active Subdomain Enumeration
