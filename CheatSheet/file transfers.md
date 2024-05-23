@@ -43,3 +43,9 @@ Transfering Files from an FTP Server Using PowerShell
 
 # Python - uploadserver
 `python3 -m uploadserver`
+
+# Python WebDav
+`sudo wsgidav --host=0.0.0.0 --port=80 --root=/tmp --auth=anonymous`
+
+# Connecting to the Webdav Share
+`dir \\192.168.49.128\DavWWWRoot`
