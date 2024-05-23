@@ -29,6 +29,8 @@
 | `-g` | Specifies the source port for the scan. |
 | `--dns-server <ns>` | DNS resolution is performed by using a specified name server. |
 
+> `-sP` ICMP check host alive  
+> `-sn` ARP check host alive instead of ICMP
 
 
 
