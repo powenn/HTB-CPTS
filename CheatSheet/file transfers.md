@@ -40,3 +40,6 @@ Setting up a Python3 FTP Server
 
 Transfering Files from an FTP Server Using PowerShell  
 `(New-Object Net.WebClient).DownloadFile('ftp://192.168.49.128/file.txt', 'C:\Users\Public\ftp-file.txt')`
+
+# Python - uploadserver
+`python3 -m uploadserver`
