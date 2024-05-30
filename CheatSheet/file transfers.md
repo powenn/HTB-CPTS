@@ -50,8 +50,8 @@ PowerShell Upload File
 # Python - uploadserver
 `python3 -m uploadserver`
 
-and put file  
-`curl --form "file=@text.log" http://127.0.0.1:8000/upload`
+and put file example
+`curl -X POST http://127.0.0.1:8000/upload -F 'files=@basicauth-example.txt' -u hello:world`
 
 # Python WebDav
 `sudo wsgidav --host=0.0.0.0 --port=80 --root=/tmp --auth=anonymous`
