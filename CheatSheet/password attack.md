@@ -118,6 +118,24 @@ start lazagne.exe all
 ```
 > `-vv` for verbose 
 
+
+## Additional Considerations
+
+There are thousands of tools & key terms we could use to hunt for credentials on Windows operating systems. Know that which ones we choose to use will be primarily based on the function of the computer. If we land on a Windows Server OS, we may use a different approach than if we land on a Windows Desktop OS. Always be mindful of how the system is being used, and this will help us know where to look. Sometimes we may even be able to find credentials by navigating and listing directories on the file system as our tools run.
+
+Here are some other places we should keep in mind when credential hunting:
+
+* Passwords in Group Policy in the SYSVOL share
+* Passwords in scripts in the SYSVOL share
+* Password in scripts on IT shares
+* Passwords in web.config files on dev machines and IT shares
+* unattend.xml
+* Passwords in the AD user or computer description fields
+* KeePass databases --> pull hash, crack and get loads of access.
+* Found on user systems and shares
+* Files such as pass.txt, passwords.docx, passwords.xlsx found on user systems, shares, Sharepoint
+
+
 ## findstr
 ```
 findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml *.git *.ps1 *.yml
