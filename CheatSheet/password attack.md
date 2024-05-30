@@ -100,3 +100,12 @@
 | `bitlocker2john -i Backup.vhd > backup.hashes`               | Uses Bitlocker2john script to extract hashes from a VHD file and directs the output to a file called backup.hashes. |
 | `file GZIP.gzip`                                             | Uses the Linux-based file tool to gather file format information. |
 | `for i in $(cat rockyou.txt);do openssl enc -aes-256-cbc -d -in GZIP.gzip -k $i 2>/dev/null \| tar xz;done` | Script that runs a for-loop to extract files from an archive. |
+
+## Key Terms to Search
+| | | |
+|-|-|-|
+| Passwords |	Passphrases |	Keys |
+| Username 	| User account | 	Creds | 
+| Users |	Passkeys |	Passphrases | 
+| configuration |	dbcredential |	dbpassword |
+| pwd |	Login |	Credentials |
