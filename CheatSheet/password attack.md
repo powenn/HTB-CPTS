@@ -141,3 +141,19 @@ Here are some other places we should keep in mind when credential hunting:
 ```
 findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml *.git *.ps1 *.yml
 ```
+
+## Passwd, Shadow & Opasswd
+
+`/etc/security/opasswd`  
+
+Unshadow
+```
+sudo cp /etc/passwd /tmp/passwd.bak 
+sudo cp /etc/shadow /tmp/shadow.bak 
+unshadow /tmp/passwd.bak /tmp/shadow.bak > /tmp/unshadowed.hashes
+```
+
+crack unshadowed hashes
+```
+hashcat -m 1800 -a 0 /tmp/unshadowed.hashes rockyou.txt -o /tmp/unshadowed.cracked
+```
