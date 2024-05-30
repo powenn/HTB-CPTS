@@ -117,3 +117,8 @@ The LaZagne project is an open source application used to retrieve lots of passw
 start lazagne.exe all
 ```
 > `-vv` for verbose 
+
+## findstr
+```
+findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml *.git *.ps1 *.yml
+```
