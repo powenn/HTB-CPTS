@@ -82,6 +82,9 @@
 ----
 ## Cracking Passwords
 
+> for hashcat rule : `-r /usr/share/hashcat/rules/best64.rule`
+
+
 | **Command**| **Description**|
 |-|-|
 | `hashcat -m 1000 dumpedhashes.txt /usr/share/wordlists/rockyou.txt` | Uses Hashcat to crack NTLM hashes using a specified wordlist. |
