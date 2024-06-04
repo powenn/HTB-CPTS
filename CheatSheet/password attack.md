@@ -234,3 +234,24 @@ powershell
 Enter-PSSession -ComputerName DC01
 ```
 
+## Hunting for Encoded Files
+
+Hunting for Files
+```
+for ext in $(echo ".xls .xls* .xltx .csv .od* .doc .doc* .pdf .pot .pot* .pp*");do echo -e "\nFile extension: " $ext; find / -name *$ext 2>/dev/null | grep -v "lib\|fonts\|share\|core" ;done
+```
+
+Hunting for SSH Keys
+```
+grep -rnw "PRIVATE KEY" /* 2>/dev/null | grep ":1"
+```
+
+John Hashing Scripts
+```
+locate *2john*
+```
+
+```
+john ssh.hash --show
+```
+
