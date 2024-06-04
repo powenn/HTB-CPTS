@@ -255,3 +255,23 @@ locate *2john*
 john ssh.hash --show
 ```
 
+## Cracking OpenSSL Encrypted Archives
+
+Using a for-loop to Display Extracted Contents
+```
+for i in $(cat rockyou.txt);do openssl enc -aes-256-cbc -d -in GZIP.gzip -k $i 2>/dev/null| tar xz;done
+```
+
+## Cracking BitLocker Encrypted Drives
+
+Using bitlocker2john
+```
+bitlocker2john -i Backup.vhd > backup.hashes
+grep "bitlocker\$0" backup.hashes > backup.hash
+```
+
+Using hashcat to Crack backup.hash
+```
+hashcat -m 22100 backup.hash /opt/useful/seclists/Passwords/Leaked-Databases/rockyou.txt -o backup.cracked
+```
+
