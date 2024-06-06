@@ -12,6 +12,7 @@
 
 |**Command**|**Description**|
 |-|-|
+| `net use n: \\192.168.220.129\Finance` | connect to a file share with the following command and map its content to the drive letter `n` | 
 | `smbclient -N -L //10.129.14.128` | Null-session testing against the SMB service. |
 | `smbmap -H 10.129.14.128` | Network share enumeration using `smbmap`. |
 | `smbmap -H 10.129.14.128 -r notes` | Recursive network share enumeration using `smbmap`. |
