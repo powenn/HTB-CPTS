@@ -147,6 +147,12 @@ Impersonating the SA User
 sa
 ```
 
+> It's recommended to run EXECUTE AS LOGIN within the `master` DB, because all users, by default, have access to that database. If a user you are trying to impersonate doesn't have access to the DB you are connecting to it will present an error. Try to move to the `master` DB using USE master.
+>
+> We can now execute any command as a sysadmin as the returned value 1 indicates. To revert the operation and return to our previous user, we can use the Transact-SQL statement `REVERT`.
+>
+> If we find a user who is not sysadmin, we can still check if the user has access to other databases or linked servers.
+
 
 ---
 ## Attacking RDP
