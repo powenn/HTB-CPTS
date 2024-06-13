@@ -68,6 +68,21 @@
 > When using Windows Authentication, we need to specify the domain name or the hostname of the target machine. If we don't specify a domain or hostname, it will assume SQL Authentication and authenticate against the users created in the SQL Server. Instead, if we define the domain or hostname, it will use Windows Authentication. If we are targetting a local account, we can use SERVERNAME\\accountname or .\\accountname. The full command would look like:
 > 
 > `sqsh -S 10.129.203.7 -U .\\julio -P 'MyPassword!' -h`
+> 
+> If we use sqlcmd, we will need to use `GO` after our query to execute the SQL syntax.
+>
+> ```
+> 1> SELECT name FROM master.dbo.sysdatabases
+> 2> GO
+>
+> name
+> --------------------------------------------------
+> master
+> tempdb
+> model
+> msdb
+> htbusers
+> ```
 
 
 
