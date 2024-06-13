@@ -63,6 +63,7 @@
 | `sqlcmd> SELECT srvname, isremote FROM sysservers` | Identify linked servers in MSSQL.  |
 | `sqlcmd> EXECUTE('select @@servername, @@version, system_user, is_srvrolemember(''sysadmin'')') AT [10.0.0.12\SQLEXPRESS]` | Identify the user and its privileges used for the remote connection in MSSQL.  |
 
+> When we authenticate to MSSQL using sqlcmd we can use the parameters -y (SQLCMDMAXVARTYPEWIDTH) and -Y (SQLCMDMAXFIXEDTYPEWIDTH) for better looking output. Keep in mind it may affect performance. 
 
 
 ---
