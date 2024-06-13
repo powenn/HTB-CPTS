@@ -45,6 +45,7 @@
 | `mysql> SHOW DATABASES;` | Show all available databases in MySQL. |
 | `mysql> USE htbusers;` | Select a specific database in MySQL. |
 | `mysql> SHOW TABLES;` | Show all available tables in the selected database in MySQL. |
+| `SELECT table_name FROM htbusers.INFORMATION_SCHEMA.TABLES` | show tables in MSSQL | 
 | `mysql> SELECT * FROM users;` | Select all available entries from the "users" table in MySQL. |
 | `sqlcmd> SELECT name FROM master.dbo.sysdatabases` | Show all available databases in MSSQL. |
 | `sqlcmd> USE htbusers` | Select a specific database in MSSQL. |
