@@ -191,6 +191,7 @@ C:\htb> net start sessionhijack
 | `dig AXFR @ns1.inlanefreight.htb inlanefreight.htb` | Perform an AXFR zone transfer attempt against a specific name server. |
 | `subfinder -d inlanefreight.com -v` | Brute-forcing subdomains. |
 | `host support.inlanefreight.com` | DNS lookup for the specified subdomain. |
+| fierce --domain zonetransfer.me | enumerate all DNS servers of the root domain and scan for a DNS zone transfer |
 
 ---
 ## Attacking Email Services
