@@ -47,6 +47,14 @@
 | `dig axfr <domain.tld> @<nameserver>` | AXFR request to the specific nameserver. |
 | `dnsenum --dnsserver <nameserver> --enum -p 0 -s 0 -o found_subdomains.txt -f ~/subdomains.list <domain.tld>` | Subdomain brute forcing. |
 
+Subdomain brute forcing with `subbrute`
+```
+powen@htb[/htb]$ git clone https://github.com/TheRook/subbrute.git >> /dev/null 2>&1
+powen@htb[/htb]$ cd subbrute
+powen@htb[/htb]$ echo "ns1.inlanefreight.com" > ./resolvers.txt
+powen@htb[/htb]$ ./subbrute inlanefreight.com -s ./names.txt -r ./resolvers.txt
+```
+
 
 
 ##### SMTP
