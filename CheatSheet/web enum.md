@@ -125,3 +125,10 @@ cat facebook.com_subdomains_passive.txt | wc -l
 | `ffuf -w ./folders.txt:FOLDERS,./wordlist.txt:WORDLIST,./extensions.txt:EXTENSIONS -u http://www.target.domain/FOLDERS/WORDLISTEXTENSIONS` | Mutated bruteforcing against the target web server. |
 
 > `cewl -m5 --lowercase -w wordlist.txt http://192.168.10.10`
+
+ReconSpider
+```
+wget https://academy.hackthebox.com/storage/modules/279/ReconSpider.zip
+unzip ReconSpider.zip
+python3 ReconSpider.py http://inlanefreight.com
+```
