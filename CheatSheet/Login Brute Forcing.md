@@ -23,6 +23,7 @@
 
 | **Command**   | **Description**   |
 | --------------|-------------------|
+| `hydra -h \| grep "Supported services" \| tr ":" "\n" \| tr " " "\n" \| column -e` | show support services |
 | `cupp -i` | Creating Custom Password Wordlist |
 | `sed -ri '/^.{,7}$/d' william.txt` | Remove Passwords Shorter Than 8 |
 | ```sed -ri '/[!-/:-@\[-`\{-~]+/!d' william.txt``` | Remove Passwords With No Special Chars |
