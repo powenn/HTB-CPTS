@@ -32,3 +32,4 @@
 | ```sed -ri '/[!-/:-@\[-`\{-~]+/!d' william.txt``` | Remove Passwords With No Special Chars |
 | `sed -ri '/[0-9]+/!d' william.txt` | Remove Passwords With No Numbers |
 | `./username-anarchy Bill Gates > bill.txt` | Generate Usernames List ||
+| `netstat -antp \| grep -i list` | list services |
