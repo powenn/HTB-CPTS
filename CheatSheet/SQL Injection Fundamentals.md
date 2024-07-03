@@ -70,3 +70,40 @@
 
 > A `UNION` statement can only operate on SELECT statements with an `equal number of columns`.
 > For advanced SQL injection, we may want to simply use 'NULL' to fill other columns, as 'NULL' fits all data types.
+
+example
+```
+MariaDB [employees]> desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| emp_no     | int(11)       | NO   | PRI | NULL    |       |
+| birth_date | date          | NO   |     | NULL    |       |
+| first_name | varchar(14)   | NO   |     | NULL    |       |
+| last_name  | varchar(16)   | NO   |     | NULL    |       |
+| gender     | enum('M','F') | NO   |     | NULL    |       |
+| hire_date  | date          | NO   |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+6 rows in set (0.329 sec)
+
+MariaDB [employees]> desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| emp_no     | int(11)       | NO   | PRI | NULL    |       |
+| birth_date | date          | NO   |     | NULL    |       |
+| first_name | varchar(14)   | NO   |     | NULL    |       |
+| last_name  | varchar(16)   | NO   |     | NULL    |       |
+| gender     | enum('M','F') | NO   |     | NULL    |       |
+| hire_date  | date          | NO   |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+6 rows in set (0.323 sec)
+
+MariaDB [employees]> select * from departments union select emp_no,birth_date from employees;
+
+...
+| 10653   | 1956-09-05         |
+| 10654   | 1958-05-01         |
++---------+--------------------+
+663 rows in set (0.633 sec)
+```
