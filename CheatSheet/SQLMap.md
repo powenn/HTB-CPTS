@@ -46,3 +46,5 @@ Cookie: PHPSESSID=um7bsgkffmbs7flglrd3s0tvu9
 
 {"id":1}
 ```
+
+> In such cases, a user is also advised to include the switch `--exclude-sysdbs` (e.g. `--dump-all` `--exclude-sysdbs`), which will instruct SQLMap to skip the retrieval of content from system databases, as it is usually of little interest for pentesters.
