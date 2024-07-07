@@ -52,3 +52,5 @@ Cookie: PHPSESSID=um7bsgkffmbs7flglrd3s0tvu9
 ```
 
 > In such cases, a user is also advised to include the switch `--exclude-sysdbs` (e.g. `--dump-all` `--exclude-sysdbs`), which will instruct SQLMap to skip the retrieval of content from system databases, as it is usually of little interest for pentesters.
+>
+> For example, if we want to skip the time-based blind and stacking SQLi payloads and only test for the boolean-based blind, error-based, and UNION-query payloads, we can specify these techniques with `--technique=BEU`.
