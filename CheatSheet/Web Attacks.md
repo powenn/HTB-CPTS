@@ -36,6 +36,7 @@ powen@htb[/htb]$ sudo python3 -m http.server 80
 ```
 > We replaced all spaces in the above XML code with $IFS, to avoid breaking the XML syntax. Furthermore, many other characters like |, >, and { may break the code, so we should avoid using them.
 
+> The expect module is not enabled/installed by default on modern PHP servers, so this attack may not always work. This is why XXE is usually used to disclose sensitive local files and source code, which may reveal additional vulnerabilities or ways to gain code execution.
 
 ---
 
