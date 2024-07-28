@@ -15,3 +15,7 @@ To find plugin versions , ex : wp-sitemap-page
 The tool uses two kinds of login brute force attacks, `xmlrpc` and `wp-login`.  
 The `wp-login` method will attempt to brute force the standard WordPress login page, while the `xmlrpc` method uses WordPress API to make login attempts through /xmlrpc.php.  
 ***The `xmlrpc` method is preferred as it’s faster.***
+
+```
+wpscan --password-attack xmlrpc -t 20 -U john -P /usr/share/wordlists/rockyou.txt --url http://blog.inlanefreight.local
+```
