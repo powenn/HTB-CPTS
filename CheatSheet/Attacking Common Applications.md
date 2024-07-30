@@ -52,3 +52,11 @@ droopescan scan joomla --url http://dev.inlanefreight.local/
 python3 joomla-brute.py -u http://dev.inlanefreight.local -w /usr/share/metasploit-framework/data/wordlists/http_default_pass.txt -usr admin
 ```
 
+## Drupal
+
+### Enumeration
+
+```
+droopescan scan drupal -u http://drupal.inlanefreight.local
+```
+
