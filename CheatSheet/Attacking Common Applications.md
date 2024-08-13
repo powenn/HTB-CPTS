@@ -124,3 +124,15 @@ egrep -r ^transf /usr/share/wordlists/ | sed 's/^[^:]*://' > /tmp/list.txt
 ```
 gobuster dir -u http://10.129.204.231/ -w /tmp/list.txt -x .aspx,.asp
 ```
+
+
+## Attacking Applications Connecting to Services
+
+### ELF Executable Examination
+
+Once the binary is loaded, we set the disassembly-flavor to define the display style of the code, and we proceed with disassembling the main function of the program.  
+```
+gdb-peda$ gdb ./octopus_checker
+gdb-peda$ set disassembly-flavor intel
+gdb-peda$ disas main
+```
