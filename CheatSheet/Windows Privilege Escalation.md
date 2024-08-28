@@ -26,6 +26,7 @@
 | `pipelist.exe /accepteula`                                   | List named pipes                               |
 | `gci \\.\pipe\`                                              | List named pipes with PowerShell               |
 | `accesschk.exe /accepteula \\.\Pipe\lsass -v`                | Review permissions on a named pipe             |
+| `accesschk.exe -w \pipe\* -v`                                | search for all named pipes that allow write access |
 
 
 
