@@ -85,7 +85,21 @@
 | `get-process -Id 3324` |Enumerating a process ID with PowerShell|
 | `get-service \| ? {$_.DisplayName -like 'Druva*'}` |Enumerate a running service by name with PowerShell|
 
-
+> **SeTakeOwnership**  
+>
+> Files of Interest  
+> ```
+> c:\inetpub\wwwwroot\web.config
+> %WINDIR%\repair\sam
+> %WINDIR%\repair\system
+> %WINDIR%\repair\software, %WINDIR%\repair\security
+> %WINDIR%\system32\config\SecEvent.Evt
+> %WINDIR%\system32\config\default.sav
+> %WINDIR%\system32\config\security.sav
+> %WINDIR%\system32\config\software.sav
+> %WINDIR%\system32\config\system.sav
+> ```
+> We may also come across .kdbx KeePass database files, OneNote notebooks, files such as passwords.*, pass.*, creds.*, scripts, other configuration files, virtual hard drive files, and more that we can target to extract sensitive information from to elevate our privileges and further our access.
 
 ## Credential Theft
 
