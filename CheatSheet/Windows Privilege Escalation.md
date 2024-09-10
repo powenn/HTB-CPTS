@@ -125,6 +125,7 @@
 | `netsh wlan show profile` | View saved wireless networks |
 | `netsh wlan show profile ilfreight_corp key=clear` | Retrieve saved wireless passwords |
 
+> People often use the StickyNotes app on Windows workstations to save passwords and other information, not realizing it is a database file. This file is located at `C:\Users\<user>\AppData\Local\Packages\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\LocalState\plum.sqlite` and is always worth searching for and examining.
 
 
 ## Other Commands
