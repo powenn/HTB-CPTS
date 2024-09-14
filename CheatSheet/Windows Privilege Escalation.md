@@ -210,3 +210,23 @@ $lnk.Description = "Browsing to the directory where this file is saved will trig
 $lnk.HotKey = "Ctrl+Alt+O"
 $lnk.Save()
 ```
+
+### Get Installed Programs via PowerShell & Registry Keys
+
+```
+PS C:\htb> $INSTALLED = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, DisplayVersion, InstallLocation
+PS C:\htb> $INSTALLED += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, InstallLocation
+PS C:\htb> $INSTALLED | ?{ $_.DisplayName -ne $null } | sort-object -Property DisplayName -Unique | Format-Table -AutoSize
+
+DisplayName                                         DisplayVersion    InstallLocation
+-----------                                         --------------    ---------------
+Adobe Acrobat DC (64-bit)                           22.001.20169      C:\Program Files\Adobe\Acrobat DC\
+CORSAIR iCUE 4 Software                             4.23.137          C:\Program Files\Corsair\CORSAIR iCUE 4 Software
+Google Chrome                                       103.0.5060.134    C:\Program Files\Google\Chrome\Application
+Google Drive                                        60.0.2.0          C:\Program Files\Google\Drive File Stream\60.0.2.0\GoogleDriveFS.exe
+Microsoft Office Profesional Plus 2016 - es-es      16.0.15330.20264  C:\Program Files (x86)\Microsoft Office
+Microsoft Office Professional Plus 2016 - en-us     16.0.15330.20264  C:\Program Files (x86)\Microsoft Office
+mRemoteNG                                           1.62              C:\Program Files\mRemoteNG
+TeamViewer                                          15.31.5           C:\Program Files\TeamViewer
+...SNIP...
+```
