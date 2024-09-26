@@ -26,6 +26,25 @@ powen@htb[/htb]$ ffuf -w /opt/useful/SecLists/Usernames/xato-net-10-million-user
     * FUZZ: consuelo
 ```
 
+# grep passwords 
+for example
+
+```
+    Contains at least one digit
+    Contains at least one lower-case character
+    Contains at least one upper-case character
+    Contains NO special characters
+    Is exactly 12 characters long
+```
+```
+grep '[[:upper:]]' /opt/useful/SecLists/Passwords/Leaked-Databases/rockyou.txt | grep '[[:lower:]]' | grep '[[:digit:]]' | grep -E '.{12}' > rockyouTrimmed.txt
+```
+or  
+gen by chatgpt
+```
+grep -E '^[a-zA-Z0-9]{12}$' /usr/share/wordlists/rockyou.txt | grep -E '[0-9]' | grep -E '[a-z]' | grep -E '[A-Z]' > gladys_passwds.txt
+```
+
 
 # Wordlists
 
