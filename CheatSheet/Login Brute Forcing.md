@@ -12,6 +12,11 @@
 >
 > example command  
 > `hydra -l admin -P /usr/share/wordlists/rockyou.txt "http-post-form://64.227.34.91:30056/login.php:username=^USER^&password=^PASS^:F=<form name='login'" -t 64`
+>
+> In Hydra’s http-post-form module, success and failure conditions are crucial for properly identifying valid and invalid login attempts. Hydra primarily relies on failure conditions (F=...) to determine when a login attempt has failed, but you can also specify a success condition (S=...) to indicate when a login is successful.
+
+
+
 
 # Wordlists
 
