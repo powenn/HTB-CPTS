@@ -65,6 +65,10 @@ It looks like wsdl is a valid parameter. Let us now issue a request for http://<
 
 # SOAPAction Spoofing
 
+SOAP messages towards a SOAP service should include both the operation and the related parameters. This operation resides in the first child element of the SOAP message's body. If HTTP is the transport of choice, it is allowed to use an additional HTTP header called SOAPAction, which contains the operation's name. The receiving web service can identify the operation within the SOAP body through this header without parsing any XML.
+
+If a web service considers only the SOAPAction attribute when determining the operation to execute, then it may be vulnerable to SOAPAction spoofing.
+
 ```
 powen@htb[/htb]$ curl http://<TARGET IP>:3002/wsdl?wsdl 
 
