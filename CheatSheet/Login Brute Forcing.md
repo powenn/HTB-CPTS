@@ -38,3 +38,19 @@
 | `sed -ri '/[0-9]+/!d' william.txt` | Remove Passwords With No Numbers |
 | `./username-anarchy Bill Gates > bill.txt` | Generate Usernames List ||
 | `netstat -antp \| grep -i list` | list services |
+
+
+We now have a generated username.txt list and jane.txt password list, but there is one more thing we need to deal with. CUPP has generated many possible passwords for us, but Jane's company, AHI, has a rather odd password policy.
+
+- Minimum Length: 6 characters
+  
+Must Include:
+- At least one uppercase letter
+- At least one lowercase letter
+- At least one number
+- At least two special characters (from the set !@#$%^&*)
+
+As we did earlier, we can use grep to filter that password list to match that policy:
+```
+powen@htb[/htb]$ grep -E '^.{6,}$' jane.txt | grep -E '[A-Z]' | grep -E '[a-z]' | grep -E '[0-9]' | grep -E '([!@#$%^&*].*){2,}' > jane-filtered.txt
+```
