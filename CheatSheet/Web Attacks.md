@@ -193,3 +193,10 @@ https://github.com/enjoiz/XXEinjector
 
 
 > In certain Java web applications, we may also be able to specify a directory instead of a file, and we will get a directory listing instead, which can be useful for locating sensitive files.
+
+
+# xsser
+
+```
+xsser -u 'http://10.129.122.203/' -g '/phishing/index.php?url=XSS'
+```
