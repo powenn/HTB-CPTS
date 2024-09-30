@@ -1,5 +1,8 @@
 # Web Services Description Language (WSDL)
 
+> Note: WSDL files can be found in many forms, such as /example.wsdl, ?wsdl, /example.disco, ?disco etc. DISCO is a Microsoft technology for publishing and discovering Web Services.
+
+
 ```
 [!bash!]$ dirb http://<TARGET IP>:3002
 
