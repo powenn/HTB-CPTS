@@ -2,6 +2,7 @@
 
 > Note: WSDL files can be found in many forms, such as /example.wsdl, ?wsdl, /example.disco, ?disco etc. DISCO is a Microsoft technology for publishing and discovering Web Services.
 
+`<portType>` describes the operations that can be performed by the web service along with the messages (or the parameters) that have to be passed.
 
 ```
 [!bash!]$ dirb http://<TARGET IP>:3002
