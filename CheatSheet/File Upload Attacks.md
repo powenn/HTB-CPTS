@@ -13,6 +13,10 @@ for char in '%20' '%0a' '%00' '%0d0a' '/' '.\\' '.' '…' ':'; do
 done
 ```
 
+# Reference
+
+https://sushant747.gitbooks.io/total-oscp-guide/content/bypass_image_upload.html
+
 # Limited FIle Uploads
 
 ## XSS
