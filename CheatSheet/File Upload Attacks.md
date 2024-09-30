@@ -17,6 +17,11 @@ done
 
 https://sushant747.gitbooks.io/total-oscp-guide/content/bypass_image_upload.html
 
+# Try when web server is nginx
+
+https://www.cnetsec.com/article/12540.html
+
+
 # Limited FIle Uploads
 
 ## XSS
