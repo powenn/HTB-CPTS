@@ -228,6 +228,68 @@ PS C:\htb> dsquery * -filter "(&(objectCategory=person)(objectClass=user)(userAc
   CN=FREIGHTLOGISTIC$,CN=Users,DC=INLANEFREIGHT,DC=LOCAL
 ```
 
+# LDAP Filtering Explained
+
+You will notice in the queries above that we are using strings such as `userAccountControl:1.2.840.113556.1.4.803:=8192`. These strings are common LDAP queries that can be used with several different tools too, including AD PowerShell, ldapsearch, and many others. Let's break them down quickly:
+
+`userAccountControl:1.2.840.113556.1.4.803`: Specifies that we are looking at the [User Account Control (UAC) attributes](https://docs.microsoft.com/en-us/troubleshoot/windows-server/identity/useraccountcontrol-manipulate-account-properties) for an object. This portion can change to include three different values we will explain below when searching for information in AD (also known as [Object Identifiers (OIDs)](https://ldap.com/ldap-oid-reference-guide/).
+`=8192` represents the decimal bitmask we want to match in this search. This decimal number corresponds to a corresponding UAC Attribute flag that determines if an attribute like `password is not required` or `account is locked` is set. These values can compound and make multiple different bit entries. Below is a quick list of potential values.
+
+## UAC Values
+
+
+## OID match strings
+
+OIDs are rules used to match bit values with attributes, as seen above. For LDAP and AD, there are three main matching rules:
+
+    1.2.840.113556.1.4.803
+
+When using this rule as we did in the example above, we are saying the bit value must match completely to meet the search requirements. Great for matching a singular attribute.
+
+    1.2.840.113556.1.4.804
+
+When using this rule, we are saying that we want our results to show any attribute match if any bit in the chain matches. This works in the case of an object having multiple attributes set.
+
+    1.2.840.113556.1.4.1941
+
+This rule is used to match filters that apply to the Distinguished Name of an object and will search through all ownership and membership entries.
+
+## Logical Operators
+
+When building out search strings, we can utilize logical operators to combine values for the search. The operators `&` `|` and `!` are used for this purpose. For example we can combine multiple [search criteria](https://learn.microsoft.com/en-us/windows/win32/adsi/search-filter-syntax) with the `& (and)` operator like so:
+`(&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=64))`
+
+The above example sets the first criteria that the object must be a user and combines it with searching for a UAC bit value of 64 (Password Can't Change). A user with that attribute set would match the filter. You can take this even further and combine multiple attributes like `(&(1) (2) (3))`. The `!` (not) and `|` (or) operators can work similarly. For example, our filter above can be modified as follows:
+`(&(objectClass=user)(!userAccountControl:1.2.840.113556.1.4.803:=64))`
+
+This would search for any user object that does `NOT` have the Password Can't Change attribute set. When thinking about users, groups, and other objects in AD, our ability to search with LDAP queries is pretty extensive.
+
+A lot can be done with UAC filters, operators, and attribute matching with OID rules. For now, this general explanation should be sufficient to cover this module. For more information and a deeper dive into using this type of filter searching, see the [Active Directory LDAP](https://academy.hackthebox.com/course/preview/active-directory-ldap) module.
+
+We have now used our foothold to perform credentialed enumeration with tools on Linux and Windows attack hosts and using built-in tools and validated host and domain information. We have proven that we can access internal hosts, password spraying, and LLMNR/NBT-NS poisoning works and that we can utilize tools that already reside on the hosts to perform our actions. Now we will take it a step further and tackle a TTP every AD pentester should have in their toolbelt, `Kerberoasting`.
+
+
+# HTB Practice
+```
+PS C:\tools> dsquery * -filter "(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=2))" -attr samaccountname description
+>>
+  samaccountname          description
+  guest                   Built-in account for guest access to the computer/domain
+  krbtgt                  Key Distribution Center Service Account
+  bross                   HTB{LD@P_I$_W1ld}
+  $725000-9jb50uejje9f
+  sm_752cbd23e73649258
+  sm_8b3ff26494d94da89
+  sm_434e56f7c43f4534a
+  sm_51dc5f77b78546d7b
+  sm_c6ccf50003bf4310b
+  sm_c7c8c6f5727449fbb
+  sm_925f7acdff9344408
+  sm_820598b3d6c548a08
+  sm_8f47aca8186c4f0da
+```
+
+
 # DCSync 
 
 | Command                                                      | Description                                                  |
