@@ -237,6 +237,7 @@ You will notice in the queries above that we are using strings such as `userAcco
 
 ## UAC Values
 
+![](https://academy.hackthebox.com/storage/modules/143/UAC-values.png)
 
 ## OID match strings
 
