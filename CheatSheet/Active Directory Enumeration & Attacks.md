@@ -192,6 +192,7 @@
 | `Remove-DomainGroupMember -Identity "Help Desk Level 1" -Members 'damundsen' -Credential $Cred2 -Verbose` | PowerView tool used to remove a specific user (`damundsent`) from a specific security group (`Help Desk Level 1`) from a Windows-based host. |
 | `ConvertFrom-SddlString`                                     | PowerShell cmd-let used to covert an `SDDL string` into a readable format. Performed from a Windows-based host. |
 
+![](https://academy.hackthebox.com/storage/modules/143/ACL_attacks_graphic.png)
 
 # Net Commands Trick
 
