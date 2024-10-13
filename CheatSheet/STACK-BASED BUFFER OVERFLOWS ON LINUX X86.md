@@ -1,3 +1,6 @@
+# External References
+https://tech-blog.cymetrics.io/posts/crystal/reverse-01/
+
 # Disable ASLR
 
 Modern operating systems have built-in protections against such vulnerabilities, like Address Space Layout Randomization (ASLR). For the purpose of learning the basics of buffer overflow exploitation, we are going to disable this memory protection features:
