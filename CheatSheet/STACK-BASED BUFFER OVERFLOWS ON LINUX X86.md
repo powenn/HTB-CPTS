@@ -136,3 +136,34 @@ Payload size: 95 bytes
 Final size of c file: 425 bytes
 Saved as: shellcode
 ```
+
+# View the memory address space ranges accessible in process
+
+Once the breakpoint is hit, students then need to use the command info proc mappings to view the memory address space ranges accessible in this process
+
+```
+(gdb) info proc mappings
+
+process 2097
+Mapped address spaces:
+
+	Start Addr   End Addr       Size     Offset objfile
+	0x56555000 0x56556000     0x1000        0x0 /home/htb-student/bow
+	0x56556000 0x56557000     0x1000        0x0 /home/htb-student/bow
+	0x56557000 0x56558000     0x1000     0x1000 /home/htb-student/bow
+	0xf7ded000 0xf7fbf000   0x1d2000        0x0 /lib32/libc-2.27.so
+	0xf7fbf000 0xf7fc0000     0x1000   0x1d2000 /lib32/libc-2.27.so
+	0xf7fc0000 0xf7fc2000     0x2000   0x1d2000 /lib32/libc-2.27.so
+	0xf7fc2000 0xf7fc3000     0x1000   0x1d4000 /lib32/libc-2.27.so
+	0xf7fc3000 0xf7fc6000     0x3000        0x0 
+	0xf7fcf000 0xf7fd1000     0x2000        0x0 
+	0xf7fd1000 0xf7fd4000     0x3000        0x0 [vvar]
+	0xf7fd4000 0xf7fd6000     0x2000        0x0 [vdso]
+	0xf7fd6000 0xf7ffc000    0x26000        0x0 /lib32/ld-2.27.so
+	0xf7ffc000 0xf7ffd000     0x1000    0x25000 /lib32/ld-2.27.so
+	0xf7ffd000 0xf7ffe000     0x1000    0x26000 /lib32/ld-2.27.so
+	__________________________________________________________________________________
+	
+	0xfffdd000 0xffffe000    0x21000        0x0 [stack]
+	__________________________________________________________________________________
+```
