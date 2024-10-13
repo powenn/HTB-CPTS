@@ -77,3 +77,12 @@ powen@htb[/htb]$ /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb
 ```
 
 To overwrite it and check if we have reached it as planned, we can add 4 more bytes with "\x66" and execute it to ensure we control the EIP.
+
+# GDB Breakpoint
+
+```
+(gdb) break bowfunc 
+
+Breakpoint 1 at 0x56555551
+```
+
