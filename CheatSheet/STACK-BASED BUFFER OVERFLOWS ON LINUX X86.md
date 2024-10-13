@@ -42,3 +42,35 @@ We don't have to change the display mode manually continually. We can also set t
 student@nix-bow:~$ echo 'set disassembly-flavor intel' > ~/.gdbinit
 ```
 
+
+# Disassemble function
+
+```
+(gdb) disas bowfunc 
+```
+
+# Registers info
+
+```
+(gdb) info registers 
+```
+for sepecfic register
+```
+(gdb) info registers eip
+```
+
+# Create Pattern
+
+```
+/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 1200 > pattern.txt
+```
+
+# GDB - Offset
+
+```
+powen@htb[/htb]$ /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 0x69423569
+
+[*] Exact match at offset 1036
+```
+
+To overwrite it and check if we have reached it as planned, we can add 4 more bytes with "\x66" and execute it to ensure we control the EIP.
