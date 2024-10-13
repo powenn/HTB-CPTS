@@ -54,6 +54,9 @@ student@nix-bow:~$ echo 'set disassembly-flavor intel' > ~/.gdbinit
 ```
 (gdb) info registers 
 ```
+
+or `info reg`
+
 for sepecfic register
 ```
 (gdb) info registers eip
