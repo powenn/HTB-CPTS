@@ -29,6 +29,8 @@ ld ${fileName}".o" -o ${fileName}
 [ "$2" == "-g" ] && gdb -q ${fileName} || ./${fileName}
 ```
 
+we can use the assembler.sh script we wrote in the previous section with the `-g` flag. It will assemble and link the code, and then run it with gdb
+
 ## Disassembling
 
 To disassemble a file, we will use the objdump tool, which dumps machine code from a file and interprets the assembly instruction of each hex code. We can disassemble a binary using the -D flag.
