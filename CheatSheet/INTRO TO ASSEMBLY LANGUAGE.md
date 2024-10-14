@@ -55,6 +55,9 @@ Disassembly of section .text:
   401025:	0f 05                	syscall
 ```
 
+> Note: In assembly, moving data does not affect the source operand. So, we can consider `mov` as a copy function, rather than an actual move.
+
+
 If we wanted to only show the assembly code, without machine code or addresses, we could add the `--no-show-raw-insn` `--no-addresses` flags, as follows:
 
 ```
