@@ -249,3 +249,44 @@ using set to modify $rdx
 ```
 gef➤  set $rdx=0x9
 ```
+
+# Functions
+
+## Stack Alignment
+
+Whenever we want to make a call to a function, we must ensure that the Top Stack Pointer (rsp) is aligned by the 16-byte boundary from the _start function stack.
+
+This means that we have to push at least 16-bytes (or a multiple of 16-bytes) to the stack before making a call to ensure functions have enough stack space to execute correctly. This requirement is mainly there for processor performance efficiency. Some functions (like in libc) are programed to crash if this boundary is not fixed to ensure performance efficiency. If we assemble our code and break right after the second push, this is what we will see:
+
+```
+───────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x00007fffffffe3a0│+0x0000: 0x0000000000000001	 ← $rsp
+0x00007fffffffe3a8│+0x0008: 0x0000000000000000
+0x00007fffffffe3b0│+0x0010: 0x00000000004010ad  →  <loopFib+5> add rax, rbx
+0x00007fffffffe3b8│+0x0018: 0x0000000000401044  →  <_start+20> call 0x4010bd <Exit>
+0x00007fffffffe3c0│+0x0020: 0x0000000000000001	 ← $r13
+─────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x401090 <initFib+9>      ret    
+     0x401091 <printFib+0>     push   rax
+     0x401092 <printFib+1>     push   rbx
+ →   0x40100e <printFib+2>     movabs rdi, 0x403039
+```
+
+We see that we have four 8-bytes pushed to the stack, making a total boundary of 32-bytes. This is due to two things:
+
+1. Each procedure call adds an 8-byte address to the stack, which is then removed with ret
+2. Each push adds 8-bytes to the stack as well
+
+So, we are inside printFib and inside loopFib, and have pushed rax and rbx, for a total of a 32-byte boundary. Since the boundary is a multiple of 16, our stack is already aligned, and we don't have to fix anything.
+
+If we were in a case where we wanted to bring the boundary up to 16, we can subtract bytes from rsp, as follows:
+
+```
+    sub rsp, 16
+    call function
+    add rsp, 16
+```
+
+This way, we are adding an extra 16-bytes to the top of the stack and then removing them after the call. If we had 8 bytes pushed, we can bring the boundary up to 16 by subtracting 8 from rsp.
+
+This may be a bit confusing, but the critical thing to remember is that we should have 16-bytes (or a multiple of 16) on top of the stack before making a call. We can count the number of (unpoped) push instructions and (unreturned) call instructions, and we will get how many 8-bytes have been pushed to the stack.
