@@ -289,4 +289,22 @@ If we were in a case where we wanted to bring the boundary up to 16, we can subt
 
 This way, we are adding an extra 16-bytes to the top of the stack and then removing them after the call. If we had 8 bytes pushed, we can bring the boundary up to 16 by subtracting 8 from rsp.
 
+
+
+# Shellcodes
+
+**shellcoder.py**
+```
+#!/usr/bin/python3
+
+import sys
+from pwn import *
+
+context(os="linux", arch="amd64", log_level="error")
+
+file = ELF(sys.argv[1])
+shellcode = file.section(".text")
+print(shellcode.hex())
+```
+
 This may be a bit confusing, but the critical thing to remember is that we should have 16-bytes (or a multiple of 16) on top of the stack before making a call. We can count the number of (unpoped) push instructions and (unreturned) call instructions, and we will get how many 8-bytes have been pushed to the stack.
