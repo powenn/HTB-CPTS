@@ -113,6 +113,12 @@ The * tells GDB to break at the instruction stored in 0x40100a.
 
 If we want to see what breakpoints we have at any point of the execution, we can use the `info breakpoint` command. We can also `disable`, `enable`, or `delete` any breakpoint. Furthermore, GDB also supports setting conditional breaks that stop the execution when a specific condition is met.
 
+## If-Conditional breakpoint
+```
+b loopFib if $rbx > 10
+```
+
+
 ## Examine
 
 To manually examine any of the addresses or registers or examine any other, we can use the `x` command in the format of `x/FMT ADDRESS`, as `help x` would tell us. The `ADDRESS` is the address or register we want to examine, while `FMT` is the examine format. The examine format `FMT` can have three parts:
