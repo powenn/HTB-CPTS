@@ -126,3 +126,34 @@ powen@htb[/htb]$ sudo ifconfig wlan0 down
 powen@htb[/htb]$ sudo iwconfig wlan0 freq "5.52G"
 powen@htb[/htb]$ sudo ifconfig wlan0 up
 ```
+
+# Airmon-ng
+
+## Checking for interfering processes
+
+```
+powen@htb[/htb]$ sudo airmon-ng check
+
+Found 5 processes that could cause trouble.
+If airodump-ng, aireplay-ng or airtun-ng stops working after
+a short period of time, you may want to kill (some of) them!
+
+  PID Name
+  718 NetworkManager
+  870 dhclient
+ 1104 avahi-daemon
+ 1105 avahi-daemon
+ 1115 wpa_supplicant
+```
+
+However, it is important to note that this step should only be taken if we are experiencing challenges during the pentesting process.
+
+```
+powen@htb[/htb]$ sudo airmon-ng check kill
+
+Killing these processes:
+
+  PID Name
+  870 dhclient
+ 1115 wpa_supplicant
+```
