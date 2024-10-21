@@ -253,3 +253,28 @@ Number of bad TKIP (WPA) packets         0
 Number of bad CCMP (WPA) packets         0
 ```
 
+# Aircrack-ng
+
+## Aircrack-ng Benchmark
+
+```
+powen@htb[/htb]$ aircrack-ng -S
+
+1628.101 k/s
+```
+
+## Cracking WEP
+
+Aircrack-ng is capable of recovering the WEP key once a sufficient number of encrypted packets have been captured using Airodump-ng. It is possible to save only the captured IVs (Initialization Vectors) using the --ivs option in Airodump-ng. Once enough IVs are captured, we can utilize the -K option in Aircrack-ng, which invokes the Korek WEP cracking method to crack the WEP key.
+
+```
+powen@htb[/htb]$ aircrack-ng -K HTB.ivs 
+```
+
+## Cracking WPA
+
+```
+powen@htb[/htb]$ aircrack-ng HTB.pcap -w /opt/wordlist.txt
+```
+
+
