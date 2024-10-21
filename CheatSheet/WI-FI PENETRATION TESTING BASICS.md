@@ -157,3 +157,99 @@ Killing these processes:
   870 dhclient
  1115 wpa_supplicant
 ```
+
+# Airdecap-ng
+
+## Using Airdecap-ng
+```
+airdecap-ng [options] <pcap file>
+```
+| Option | Description |
+| - | - |
+| -l |	don't remove the 802.11 header |
+| -b |	access point MAC address filter |
+| -k |	WPA/WPA2 Pairwise Master Key in hex |
+| -e |	target network ascii identifier |
+| -p |	target network WPA/WPA2 passphrase |
+| -w |	target network WEP key in hexadecimal |
+
+## Removing Wireless Headers from Unencrypted Capture file
+
+Capturing packets on an open network would result in an unencrypted capture file. Even if the capture file is already unencrypted, it may still contain numerous frames that are not relevant to our analysis. To streamline the data, we can utilize airdecap-ng to eliminate the wireless headers from an unencrypted capture file.
+
+To remove the wireless headers from the capture file using Airdecap-ng, we can use the following command
+```
+airdecap-ng -b <bssid> <capture-file>
+```
+
+Replace with the MAC address of the access point and with the name of the capture file.
+
+```
+powen@htb[/htb]$ sudo airdecap-ng -b 00:14:6C:7A:41:81 opencapture.cap
+
+Total number of stations seen            0
+Total number of packets read           251
+Total number of WEP data packets         0
+Total number of WPA data packets         0
+Number of plaintext data packets         0
+Number of decrypted WEP  packets         0
+Number of corrupted WEP  packets         0
+Number of decrypted WPA  packets         0
+Number of bad TKIP (WPA) packets         0
+Number of bad CCMP (WPA) packets         0
+```
+
+This will produce a decrypted file with the suffix `-dec.cap`, such as `opencapture-dec.cap`, containing the streamlined data ready for further analysis.
+
+## Decrypting WEP-encrypted captures
+
+Airdecap-ng is a powerful tool for decrypting WEP-encrypted capture files. Once we have obtained the hexadecimal WEP key, we can use it to decrypt the captured packets. This process will remove the wireless encryption, allowing us to analyze the data.
+
+To decrypt a WEP-encrypted capture file using Airdecap-ng, we can use the following command:
+
+```
+airdecap-ng -w <WEP-key> <capture-file>
+```
+
+Replace <WEP-key> with the hexadecimal WEP key and with the name of the capture file.
+
+```
+powen@htb[/htb]$ sudo airdecap-ng -w 1234567890ABCDEF HTB-01.cap
+
+Total number of stations seen            6
+Total number of packets read           356
+Total number of WEP data packets       235
+Total number of WPA data packets       121
+Number of plaintext data packets         0
+Number of decrypted WEP  packets         0
+Number of corrupted WEP  packets         0
+Number of decrypted WPA  packets       235
+Number of bad TKIP (WPA) packets         0
+Number of bad CCMP (WPA) packets         0
+```
+
+## Decrypting WPA-encrypted captures
+
+Airdecap-ng can also decrypt WPA-encrypted capture files, provided we have the passphrase. This tool will strip the WPA encryption, making it possible to analyze the captured data.
+
+To decrypt a WPA-encrypted capture file using Airdecap-ng, we can use the following command:
+
+```
+airdecap-ng -p <passphrase> <capture-file> -e <essid>
+```
+
+```
+powen@htb[/htb]$ sudo airdecap-ng -p 'abdefg' HTB-01.cap -e "Wireless Lab"
+
+Total number of stations seen            6
+Total number of packets read           356
+Total number of WEP data packets       235
+Total number of WPA data packets       121
+Number of plaintext data packets         0
+Number of decrypted WEP  packets         0
+Number of corrupted WEP  packets         0
+Number of decrypted WPA  packets       121
+Number of bad TKIP (WPA) packets         0
+Number of bad CCMP (WPA) packets         0
+```
+
