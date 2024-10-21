@@ -277,4 +277,28 @@ powen@htb[/htb]$ aircrack-ng -K HTB.ivs
 powen@htb[/htb]$ aircrack-ng HTB.pcap -w /opt/wordlist.txt
 ```
 
+# Connecting to Wi-Fi Networks
+
+After connecting, we can obtain an IP address by using the dhclient utility. This will assign an IP from the network's DHCP server, completing the connection setup.
+
+```
+powen@htb[/htb]$ sudo dhclient wlan0
+```
+
+if we have a previously assigned DHCP IP address from a different connection, we'll need to release it first. Run the following command to remove the existing IP address:
+
+```
+ powen@htb[/htb]$ sudo dhclient wlan0 -r
+
+Killed old client process
+```
+
+## Connecting with Network Manager Utilities
+
+One of the ways that we can easily connect to wireless networks in Linux is through the usage of nmtui. This utility will give us a somewhat graphical perspective while connecting to these wireless networks.
+
+```
+powen@htb[/htb]$ sudo nmtui
+```
+
 
