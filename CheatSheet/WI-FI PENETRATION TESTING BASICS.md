@@ -158,6 +158,22 @@ Killing these processes:
  1115 wpa_supplicant
 ```
 
+# Airodump-ng
+
+The supported bands are a, b, and g.
+
+- a uses 5 GHz
+- b uses 2.4 GHz
+- g uses 2.4 GHz
+
+```
+powen@htb[/htb]$ sudo airodump-ng wlan0mon --band a
+```
+
+```
+airodump-ng --band abg wlan0mon
+```
+
 # Airdecap-ng
 
 ## Using Airdecap-ng
