@@ -556,3 +556,52 @@ Just like Mimikatz, to take advantage of Linikatz, we need to be root on the mac
 
 
 > Note: As we discussed in the Pass the Ticket from Windows section, a computer account needs a ticket to interact with the Active Directory environment. Similarly, a Linux domain joined machine needs a ticket. The ticket is represented as a keytab file located by default at `/etc/krb5.keytab` and can only be read by the root user. If we gain access to this ticket, we can impersonate the computer account LINUX01$.INLANEFREIGHT.HTB
+
+# Kerberos "Double Hop" Problem
+
+## Background
+The "Double Hop" problem often occurs when using WinRM/Powershell since the default authentication mechanism only provides a ticket to access a specific resource. This will likely cause issues when trying to perform lateral movement or even access file shares from the remote shell. In this situation, the user account being used has the rights to perform an action but is denied access. The most common way to get shells is by attacking an application on the target host or using credentials and a tool such as PSExec. In both of these scenarios, the initial authentication was likely performed over SMB or LDAP, which means the user's NTLM Hash would be stored in memory. Sometimes we have a set of credentials and are restricted to a particular method of authentication, such as WinRM, or would prefer to use WinRM for any number of reasons.
+
+The crux of the issue is that when using WinRM to authenticate over two or more connections, the user's password is never cached as part of their login. If we use Mimikatz to look at the session, we'll see that all credentials are blank. As stated previously, when we use Kerberos to establish a remote session, we are not using a password for authentication. When password authentication is used, with PSExec, for example, that NTLM hash is stored in the session, so when we go to access another resource, the machine can pull the hash from memory and authenticate us.
+
+## Workaround #1: PSCredential Object
+
+If we check with `klist`, we see that we only have a cached Kerberos ticket for our current server.
+
+set up a PSCredential object and try again. First, we set up our authentication.
+
+```
+*Evil-WinRM* PS C:\Users\backupadm\Documents> $SecPassword = ConvertTo-SecureString '!qazXSW@' -AsPlainText -Force
+
+|S-chain|-<>-127.0.0.1:9051-<><>-172.16.8.50:5985-<><>-OK
+|S-chain|-<>-127.0.0.1:9051-<><>-172.16.8.50:5985-<><>-OK
+*Evil-WinRM* PS C:\Users\backupadm\Documents>  $Cred = New-Object System.Management.Automation.PSCredential('INLANEFREIGHT\backupadm', $SecPassword)
+```
+
+Now we can try to query the SPN accounts using PowerView and are successful because we passed our credentials along with the command.
+
+```
+*Evil-WinRM* PS C:\Users\backupadm\Documents> get-domainuser -spn -credential $Cred | select samaccountname
+```
+
+## Workaround #2: Register PSSession Configuration
+
+We've seen what we can do to overcome this problem when using a tool such as evil-winrm to connect to a host via WinRM. What if we're on a domain-joined host and can connect remotely to another using WinRM? Or we are working from a Windows attack host and connect to our target via WinRM using the Enter-PSSession cmdlet? Here we have another option to change our setup to be able to interact directly with the DC or other hosts/resources without having to set up a PSCredential object and include credentials along with every command (which may not be an option with some tools).
+
+One trick we can use here is registering a new session configuration using the Register-PSSessionConfiguration cmdlet.
+
+```
+PS C:\htb> Register-PSSessionConfiguration -Name backupadmsess -RunAsCredential inlanefreight\backupadm
+```
+
+Once this is done, we need to restart the WinRM service by typing `Restart-Service` WinRM in our current PSSession. This will kick us out, so we'll start a new PSSession using the named registered session we set up previously.
+
+```
+PS C:\htb> Enter-PSSession -ComputerName DEV01 -Credential INLANEFREIGHT\backupadm -ConfigurationName  backupadmsess
+[DEV01]: PS C:\Users\backupadm\Documents> klist
+```
+
+
+
+
+
