@@ -601,6 +601,18 @@ PS C:\htb> Enter-PSSession -ComputerName DEV01 -Credential INLANEFREIGHT\backupa
 [DEV01]: PS C:\Users\backupadm\Documents> klist
 ```
 
+## Finding Passwords in the Description Field using Get-Domain User
+
+```
+PS C:\htb> Get-DomainUser * | Select-Object samaccountname,description |Where-Object {$_.Description -ne $null}
+
+samaccountname description
+-------------- -----------
+administrator  Built-in account for administering the computer/domain
+guest          Built-in account for guest access to the computer/domain
+krbtgt         Key Distribution Center Service Account
+ldap.agent     *** DO NOT CHANGE ***  3/12/2012: Sunsh1ne4All!
+```
 
 
 
