@@ -3,8 +3,8 @@
 | Command                                                      | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `nslookup ns1.inlanefreight.com`| Query the DNS and discover the IP address to domain name mapping of the target entered|
-| `sudo tcpdump -i ens224`  | Start capturing network packets on the network interface|
-| `sudo responder -I ens224 -A`   | Start responding to & analyzing `LLMNR`, `NBT-NS` and `MDNS` queries |
+| `sudo tcpdump -i ens224 -v`  | Start capturing network packets on the network interface|
+| `sudo responder -I ens224 -A -v`   | Start responding to & analyzing `LLMNR`, `NBT-NS` and `MDNS` queries |
 | `fping -asgq 172.16.5.0/23`  | Performs a ping sweep |
 | `sudo nmap -v -A -iL hosts.txt -oN output.txt` |nmap scanning|
 | `./kerbrute_linux userenum -d INLANEFREIGHT.LOCAL --dc 172.16.5.5 jsmith.txt -o kerb-results` | Enumerating users with kerbrute |
