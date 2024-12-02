@@ -10,6 +10,11 @@
 | `./kerbrute_linux userenum -d INLANEFREIGHT.LOCAL --dc 172.16.5.5 jsmith.txt -o kerb-results` | Enumerating users with kerbrute |
 | `crackmapexec smb 172.16.5.5 --users`  | Uses `CrackMapExec` to discover users in a target Windows domain |
 
+```
+crackmapexec smb -u ‘AB920’ -p ‘weasal’ 172.16.7.3 --users > DomainUser.txt
+cat DomainUser.txt | awk ‘{print $5}’ | sed ‘s/^.*\\//’ | sort -u > SortedDomainUser.txt
+```
+
 
 # LLMNR/NTB-NS Poisoning 
 
