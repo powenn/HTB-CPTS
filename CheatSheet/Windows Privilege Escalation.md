@@ -27,6 +27,7 @@
 | `gci \\.\pipe\`                                              | List named pipes with PowerShell               |
 | `accesschk.exe /accepteula \\.\Pipe\lsass -v`                | Review permissions on a named pipe             |
 | `accesschk.exe -w \pipe\* -v`                                | search for all named pipes that allow write access |
+| post/multi/recon/local_exploit_suggester | meterpreter module |
 
 
 
