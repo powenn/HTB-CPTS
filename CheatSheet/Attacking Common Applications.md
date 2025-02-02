@@ -78,6 +78,8 @@ ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.204.227:8080/cgi/F
 ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.204.227:8080/cgi/FUZZ.bat
 ```
 
+> For Linux , try enum with extensions like .sh , py , pl , rb ...
+
 ### Enumeration - Gobuster
 
 ```
