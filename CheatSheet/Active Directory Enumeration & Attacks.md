@@ -9,6 +9,9 @@
 | `sudo nmap -v -A -iL hosts.txt -oN output.txt` |nmap scanning|
 | `./kerbrute_linux userenum -d INLANEFREIGHT.LOCAL --dc 172.16.5.5 jsmith.txt -o kerb-results` | Enumerating users with kerbrute |
 | `crackmapexec smb 172.16.5.5 --users`  | Uses `CrackMapExec` to discover users in a target Windows domain |
+| `crackmapexec smb 10.10.11.35 -u "guest" -p "" --rid-brute \| grep "SidTypeUser"` | brute force rid to enum users |
+
+> administrator, guest, krbtgt, domain admins, root , are some common default SMB names
 
 ```
 crackmapexec smb -u ‘AB920’ -p ‘weasal’ 172.16.7.3 --users > DomainUser.txt
