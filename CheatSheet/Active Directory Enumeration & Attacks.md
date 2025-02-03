@@ -11,8 +11,10 @@
 | `crackmapexec smb 172.16.5.5 --users`  | Uses `CrackMapExec` to discover users in a target Windows domain |
 | `crackmapexec smb 10.10.11.35 -u "guest" -p "" --rid-brute \| grep "SidTypeUser"` | brute force rid to enum users |
 | `enum4linux-ng -A 10.10.11.35 -u michael.wrightson -p 'Cicada$M6Corpb*@Lp#nZp!8'` | enum AD related things |
+| `nxc ldap administrator.htb -d administrator.htb -u Olivia -p ichliebedich --dns-server 10.10.11.42 --bloodhound -c All` | bloodhound-python alternative |
 
 > administrator, guest, krbtgt, domain admins, root , are some common default SMB names
+> In bloodhound , it's important to check object control
 
 ```
 crackmapexec smb -u ‘AB920’ -p ‘weasal’ 172.16.7.3 --users > DomainUser.txt
