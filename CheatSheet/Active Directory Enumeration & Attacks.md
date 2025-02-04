@@ -182,6 +182,9 @@ cat DomainUser.txt | awk ‘{print $5}’ | sed ‘s/^.*\\//’ | sort -u > Sort
 
 > Note: This does not work against a `Windows Server 2019 Domain Controller`, regardless of the domain functional level. It will always return a service ticket encrypted with the highest level of encryption supported by the target account. This being said, if we find ourselves in a domain with Domain Controllers running on Server 2016 or earlier (which is quite common), enabling AES will not partially mitigate Kerberoasting by only returning AES encrypted tickets, which are much more difficult to crack, but rather will allow an attacker to request an RC4 encrypted service ticket. In Windows Server 2019 DCs, enabling AES encryption on an SPN account will result in us receiving an AES-256 (type 18) service ticket, which is substantially more difficult (but not impossible) to crack, especially if a relatively weak dictionary password is in use.
 
+> `Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great)` for this error , sync time to DC server
+> `sudo ntpdate 10.10.11.42`
+
 
 
 # ACL Enumeration & Tactics 
