@@ -21,6 +21,8 @@ crackmapexec smb -u ‘AB920’ -p ‘weasal’ 172.16.7.3 --users > DomainUser.
 cat DomainUser.txt | awk ‘{print $5}’ | sed ‘s/^.*\\//’ | sort -u > SortedDomainUser.txt
 ```
 
+`sudo ntpdate 10.10.11.42` : sync time to DC !!
+
 
 # LLMNR/NTB-NS Poisoning 
 
