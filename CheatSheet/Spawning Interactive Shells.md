@@ -57,3 +57,7 @@ vim
 :set shell=/bin/sh
 :shell
 ```
+
+# TTY
+https://0xffsec.com/handbook/shells/full-tty/
+`export TERM=xterm-256color`
