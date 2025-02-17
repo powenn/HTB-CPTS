@@ -60,6 +60,8 @@ cat DomainUser.txt | awk ‘{print $5}’ | sed ‘s/^.*\\//’ | sort -u > Sort
 | `Import-Module .\DomainPasswordSpray.ps1` | Used to import the PowerShell-based |
 | `Invoke-DomainPasswordSpray -Password Welcome1 -OutFile spray_success -ErrorAction SilentlyContinue` | Performs a password spraying attack and outputs the results |
 
+ldapsearch: https://viperone.gitbook.io/pentest-everything/everything/ports/ldap 
+
 # Enumerating Security Controls
 
 | Command                                                      | Description                                                  |
